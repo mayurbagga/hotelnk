@@ -59,8 +59,8 @@ const ContactSection = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-cream mb-1">Address</h3>
-                <p className="text-cream/60">123 Luxury Avenue, Downtown District</p>
-                <p className="text-cream/60">New Delhi, India 110001</p>
+                <p className="text-cream/60">Hospital Road</p>
+                <p className="text-cream/60">Bhuj, Gujarat, India</p>
               </div>
             </motion.div>
 
