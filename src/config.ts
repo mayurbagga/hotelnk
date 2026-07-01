@@ -27,10 +27,10 @@ export interface Config {
 
 export const CONFIG: Config = {
   hotelName: "Hotel NK",
-  ownerEmail: "owner@grandserenity.com",
-  upiId: "grandserenity@upi",
-  upiName: "Grand Serenity Hotel",
-  whatsappNumber: "91XXXXXXXXXX",
+  ownerEmail: "info@hotelnk.in",
+  upiId: "myu98198@okicici",
+  upiName: "Hotel NK",
+  whatsappNumber: "9979898198",
   emailjsServiceId: "YOUR_SERVICE_ID",
   emailjsTemplateId_guest: "TEMPLATE_GUEST",
   emailjsTemplateId_owner: "TEMPLATE_OWNER",
