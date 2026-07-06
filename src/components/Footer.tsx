@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { Instagram, Facebook, Twitter, Linkedin, MapPin, Phone, Mail, Heart } from 'lucide-react';
-import { CONFIG } from '../config';
 import { Link } from 'react-scroll';
+import { useConfig } from '../contexts/ConfigContext';
 
 const Footer = () => {
+  const { config } = useConfig();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -17,7 +18,7 @@ const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h3 className="font-playfair text-2xl text-cream mb-2">{CONFIG.hotelName}</h3>
+              <h3 className="font-playfair text-2xl text-cream mb-2">{config.hotelName}</h3>
               <p className="text-cream/60 text-sm mb-4">
                 Experience luxury redefined in the heart of the city. Where every moment becomes a treasured memory.
               </p>
@@ -96,7 +97,7 @@ const Footer = () => {
             >
               <h4 className="text-cream font-semibold mb-4">Our Rooms</h4>
               <ul className="space-y-2">
-                {CONFIG.rooms.map((room) => (
+                {config.rooms.map((room) => (
                   <li key={room.id}>
                     <Link
                       to="rooms"
@@ -130,14 +131,14 @@ const Footer = () => {
                 </li>
                 <li className="flex items-center gap-2 text-cream/60">
                   <Phone className="w-4 h-4 text-gold" />
-                  <a href={`tel:${CONFIG.whatsappNumber}`} className="text-sm hover:text-gold transition-colors">
-                    +{CONFIG.whatsappNumber}
+                  <a href={`tel:${config.whatsappNumber}`} className="text-sm hover:text-gold transition-colors">
+                    +{config.whatsappNumber}
                   </a>
                 </li>
                 <li className="flex items-center gap-2 text-cream/60">
                   <Mail className="w-4 h-4 text-gold" />
-                  <a href={`mailto:${CONFIG.ownerEmail}`} className="text-sm hover:text-gold transition-colors">
-                    {CONFIG.ownerEmail}
+                  <a href={`mailto:${config.ownerEmail}`} className="text-sm hover:text-gold transition-colors">
+                    {config.ownerEmail}
                   </a>
                 </li>
               </ul>
@@ -156,7 +157,7 @@ const Footer = () => {
             <span>Powered by trust — no surprise charges</span>
           </div>
           <div className="flex items-center justify-center gap-1 text-cream/60 text-sm">
-            <span>&copy; {currentYear} {CONFIG.hotelName}.</span>
+            <span>&copy; {currentYear} {config.hotelName}.</span>
             <span className="flex items-center gap-1">
               Made with <Heart className="w-4 h-4 text-gold fill-current" /> for luxury travelers
             </span>

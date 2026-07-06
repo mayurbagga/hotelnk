@@ -1,13 +1,14 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import { CONFIG } from '../config';
+import { useConfig } from '../contexts/ConfigContext';
 
 const Hero = () => {
+  const { config } = useConfig();
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
-  const words = `Welcome to ${CONFIG.hotelName}`.split(' ');
+  const words = `Welcome to ${config.hotelName}`.split(' ');
 
   const container = {
     hidden: { opacity: 0 },
@@ -116,7 +117,7 @@ const Hero = () => {
           <motion.div variants={child}>
             <motion.a
               href="#rooms"
-              className="shimmer-button inline-block px-8 py-4 rounded-full text-charcoal font-semibold text-lg shadow-lg shadow-gold/20"
+              className="shimmer-button inline-block px-8 py-4 rounded-full text-charcoal font-semibold text-lg shadow-lg shadow-gold/20 whitespace-nowrap"
               whileHover={{ scale: 1.05, boxShadow: '0 10px 40px rgba(201, 168, 76, 0.4)' }}
               whileTap={{ scale: 0.95 }}
               animate={{

@@ -2,9 +2,10 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { Link } from 'react-scroll';
-import { CONFIG } from '../config';
+import { useConfig } from '../contexts/ConfigContext';
 
 const Navbar = () => {
+  const { config } = useConfig();
   const [isOpen, setIsOpen] = useState(false);
   const { scrollY } = useScroll();
 
@@ -45,7 +46,7 @@ const Navbar = () => {
             >
               <img
                 src="/hotelnklogo.png"
-                alt={`${CONFIG.hotelName} Logo`}
+                alt={`${config.hotelName} Logo`}
                 className="h-20 object-contain"
               />
             </motion.div>
@@ -72,7 +73,7 @@ const Navbar = () => {
           {/* CTA */}
           <div className="hidden md:flex items-center gap-4">
             <motion.a
-              href={`tel:${CONFIG.whatsappNumber}`}
+              href={`tel:${config.whatsappNumber}`}
               className="flex items-center gap-2 text-cream/60 hover:text-gold transition-colors"
               whileHover={{ scale: 1.05 }}
             >
@@ -87,11 +88,17 @@ const Navbar = () => {
               duration={500}
             >
               <motion.button
-                className="px-5 py-2 bg-gold text-charcoal rounded-full text-sm font-semibold hover:bg-gold-light transition-colors"
-                whileHover={{ scale: 1.05 }}
+                className="px-6 py-2.5 shimmer-button text-charcoal rounded-full text-sm font-bold shadow-[0_0_15px_rgba(201,168,76,0.3)] tracking-wide whitespace-nowrap"
+                whileHover={{ scale: 1.05, boxShadow: '0 0 25px rgba(201,168,76,0.5)' }}
                 whileTap={{ scale: 0.95 }}
+                animate={{
+                  backgroundPosition: ['0% 0%', '200% 0%']
+                }}
+                transition={{
+                  backgroundPosition: { duration: 3, repeat: Infinity, ease: 'linear' }
+                }}
               >
-                Book Now
+                BOOK NOW
               </motion.button>
             </Link>
           </div>
@@ -136,10 +143,26 @@ const Navbar = () => {
                   offset={-80}
                   duration={500}
                   onClick={() => setIsOpen(false)}
+                  className="block w-full"
                 >
-                  <button className="w-full py-3 bg-gold text-charcoal rounded-xl font-semibold">
-                    Book Now
-                  </button>
+                  <motion.button
+                    className="w-full py-4 shimmer-button text-charcoal rounded-xl font-bold text-lg shadow-[0_0_20px_rgba(201,168,76,0.3)] tracking-wide"
+                    whileTap={{ scale: 0.98 }}
+                    animate={{
+                      backgroundPosition: ['0% 0%', '200% 0%'],
+                      boxShadow: [
+                        '0 0 20px rgba(201,168,76,0.3)',
+                        '0 0 40px rgba(201,168,76,0.5)',
+                        '0 0 20px rgba(201,168,76,0.3)'
+                      ]
+                    }}
+                    transition={{
+                      backgroundPosition: { duration: 3, repeat: Infinity, ease: 'linear' },
+                      boxShadow: { duration: 2, repeat: Infinity, ease: 'easeInOut' }
+                    }}
+                  >
+                    BOOK NOW
+                  </motion.button>
                 </Link>
               </div>
             </div>

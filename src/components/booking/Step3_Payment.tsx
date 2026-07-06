@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import { format } from 'date-fns';
 import { generateUPILink } from '../../utils/upiLinkGenerator';
 import { generateBookingId } from '../../utils/bookingIdGenerator';
-import { CONFIG } from '../../config';
+import { useConfig } from '../../contexts/ConfigContext';
 
 interface Step3Props {
   step: number;
@@ -38,12 +38,13 @@ const Step3_Payment = ({
   room,
   total
 }: Step3Props) => {
+  const { config } = useConfig();
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const bookingId = state.bookingId || generateBookingId();
-  const upiLink = generateUPILink(total, state.guestName, bookingId);
+  const upiLink = generateUPILink(config, total, state.guestName, bookingId);
 
   if (!state.bookingId) {
     setBookingId(bookingId);
@@ -155,8 +156,8 @@ const Step3_Payment = ({
         <div className="flex-1 space-y-4">
           <div className="bg-charcoal rounded-xl p-4">
             <p className="text-cream/60 text-sm mb-1">Pay to</p>
-            <p className="text-cream font-semibold">{CONFIG.upiName}</p>
-            <p className="text-gold">{CONFIG.upiId}</p>
+            <p className="text-cream font-semibold">{config.upiName}</p>
+            <p className="text-gold">{config.upiId}</p>
           </div>
 
           <a

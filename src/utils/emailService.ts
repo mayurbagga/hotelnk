@@ -1,5 +1,5 @@
 import emailjs from '@emailjs/browser';
-import { CONFIG } from '../config';
+import { Config } from '../config';
 
 interface BookingData {
   bookingId: string;
@@ -15,7 +15,7 @@ interface BookingData {
   upiReference: string;
 }
 
-export const sendEmails = async (bookingData: BookingData): Promise<boolean> => {
+export const sendEmails = async (config: Config, bookingData: BookingData): Promise<boolean> => {
   try {
     const templateParams = {
       to_email: bookingData.guestEmail,
@@ -28,30 +28,30 @@ export const sendEmails = async (bookingData: BookingData): Promise<boolean> => 
       total_amount: `₹${bookingData.totalAmount.toLocaleString()}`,
       guest_phone: bookingData.guestPhone,
       special_requests: bookingData.specialRequests || 'None',
-      hotel_name: CONFIG.hotelName,
-      hotel_email: CONFIG.ownerEmail,
-      hotel_whatsapp: CONFIG.whatsappNumber,
+      hotel_name: config.hotelName,
+      hotel_email: config.ownerEmail,
+      hotel_whatsapp: config.whatsappNumber,
       upi_reference: bookingData.upiReference
     };
 
     await emailjs.send(
-      CONFIG.emailjsServiceId,
-      CONFIG.emailjsTemplateId_guest,
+      config.emailjsServiceId,
+      config.emailjsTemplateId_guest,
       templateParams,
-      CONFIG.emailjsPublicKey
+      config.emailjsPublicKey
     );
 
     const ownerParams = {
       ...templateParams,
-      to_email: CONFIG.ownerEmail,
+      to_email: config.ownerEmail,
       guest_email: bookingData.guestEmail
     };
 
     await emailjs.send(
-      CONFIG.emailjsServiceId,
-      CONFIG.emailjsTemplateId_owner,
+      config.emailjsServiceId,
+      config.emailjsTemplateId_owner,
       ownerParams,
-      CONFIG.emailjsPublicKey
+      config.emailjsPublicKey
     );
 
     return true;

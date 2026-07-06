@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
-import { CONFIG } from '../config';
+import { useConfig } from '../contexts/ConfigContext';
 
 const ContactSection = () => {
+  const { config } = useConfig();
   return (
     <section id="contact" className="py-24 bg-charcoal px-4">
       <div className="max-w-7xl mx-auto">
@@ -74,10 +75,10 @@ const ContactSection = () => {
               <div>
                 <h3 className="font-semibold text-cream mb-1">Phone</h3>
                 <a
-                  href={`tel:${CONFIG.whatsappNumber}`}
+                  href={`tel:${config.whatsappNumber}`}
                   className="text-cream/60 hover:text-gold transition-colors"
                 >
-                  +{CONFIG.whatsappNumber}
+                  +{config.whatsappNumber}
                 </a>
               </div>
             </motion.div>
@@ -92,10 +93,10 @@ const ContactSection = () => {
               <div>
                 <h3 className="font-semibold text-cream mb-1">Email</h3>
                 <a
-                  href={`mailto:${CONFIG.ownerEmail}`}
+                  href={`mailto:${config.ownerEmail}`}
                   className="text-cream/60 hover:text-gold transition-colors"
                 >
-                  {CONFIG.ownerEmail}
+                  {config.ownerEmail}
                 </a>
               </div>
             </motion.div>
@@ -115,7 +116,7 @@ const ContactSection = () => {
             </motion.div>
 
             <motion.a
-              href={`https://wa.me/${CONFIG.whatsappNumber}?text=Hi, I'd like to inquire about booking at ${CONFIG.hotelName}`}
+              href={`https://wa.me/${config.whatsappNumber}?text=Hi, I'd like to inquire about booking at ${config.hotelName}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-3 w-full py-4 bg-green-600 hover:bg-green-700 rounded-xl text-white font-semibold transition-colors"

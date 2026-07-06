@@ -170,7 +170,7 @@ const RoomDetailModal = ({ room, isOpen, onClose }: RoomDetailModalProps) => {
                 </div>
               </motion.div>
 
-              <motion.div variants={itemVariants} className="flex items-center justify-between">
+              <motion.div variants={itemVariants} className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                 <div>
                   <span className="text-cream/60">Starting from</span>
                   <div className="flex items-baseline gap-1">
@@ -183,7 +183,7 @@ const RoomDetailModal = ({ room, isOpen, onClose }: RoomDetailModalProps) => {
 
                 <motion.button
                   onClick={() => setShowBooking(true)}
-                  className="shimmer-button px-8 py-4 rounded-full text-charcoal font-semibold text-lg"
+                  className="w-full md:w-auto shimmer-button px-8 py-4 rounded-xl md:rounded-full text-charcoal font-bold text-lg tracking-wide whitespace-nowrap text-center"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

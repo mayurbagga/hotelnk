@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import confetti from 'canvas-confetti';
 import { CheckCircle, Calendar, Mail, Phone } from 'lucide-react';
 import { format } from 'date-fns';
-import { CONFIG } from '../../config';
+import { useConfig } from '../../contexts/ConfigContext';
 import { sendEmails } from '../../utils/emailService';
 
 interface Step4Props {
@@ -33,6 +33,7 @@ const Step4_Confirmation = ({
   onClose,
   resetBooking
 }: Step4Props) => {
+  const { config } = useConfig();
   const [emailSent, setEmailSent] = useState(false);
   const [emailError, setEmailError] = useState(false);
 
@@ -79,7 +80,7 @@ const Step4_Confirmation = ({
     const sendConfirmationEmails = async () => {
       if (!state.bookingId) return;
 
-      const result = await sendEmails({
+      const result = await sendEmails(config, {
         bookingId: state.bookingId,
         guestName: state.guestName,
         guestEmail: state.guestEmail,
@@ -195,7 +196,7 @@ const Step4_Confirmation = ({
       >
         <div className="flex items-center justify-center gap-4 text-sm text-cream/60">
           <a
-            href={`tel:${CONFIG.whatsappNumber}`}
+            href={`tel:${config.whatsappNumber}`}
             className="flex items-center gap-1 hover:text-gold transition-colors"
           >
             <Phone className="w-4 h-4" />
@@ -203,7 +204,7 @@ const Step4_Confirmation = ({
           </a>
           <span>|</span>
           <a
-            href={`https://wa.me/${CONFIG.whatsappNumber}`}
+            href={`https://wa.me/${config.whatsappNumber}`}
             className="flex items-center gap-1 hover:text-gold transition-colors"
           >
             WhatsApp

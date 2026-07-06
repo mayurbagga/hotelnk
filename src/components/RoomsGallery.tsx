@@ -1,10 +1,12 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Star, Users, ArrowRight } from 'lucide-react';
-import { CONFIG, Room } from '../config';
+import { Room } from '../config';
 import RoomDetailModal from './RoomDetailModal';
+import { useConfig } from '../contexts/ConfigContext';
 
 const RoomsGallery = () => {
+  const { config } = useConfig();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
@@ -65,7 +67,7 @@ const RoomsGallery = () => {
           animate={isInView ? 'visible' : 'hidden'}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {CONFIG.rooms.map((room) => (
+          {config.rooms.map((room) => (
             <motion.div
               key={room.id}
               variants={item}
